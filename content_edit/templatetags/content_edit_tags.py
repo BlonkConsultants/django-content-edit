@@ -47,7 +47,7 @@ class CmsContentNode(template.Node):
 
         # Check user Perms
         change_perm = False
-        if user.is_authenticated():
+        if user.is_authenticated:
             if (CHECK_PERMS and user.has_perm('content_edit_change_cmscontent')) or (not CHECK_PERMS and user.is_staff):
                 change_perm = True
 
