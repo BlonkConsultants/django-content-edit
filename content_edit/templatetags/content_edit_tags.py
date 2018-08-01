@@ -1,3 +1,4 @@
+import django
 from django import template
 from django.contrib.auth.models import AnonymousUser
 try:
@@ -43,11 +44,11 @@ class CmsContentNode(template.Node):
             try:
                 content = CmsContent.objects.get(**object_filter)
             except CmsContent.DoesNotExist:
-                content= CmsContent(content='')
+                content = CmsContent(content='')
 
         # Check user Perms
         change_perm = False
-        if user.is_authenticated:
+        if user.is_authenticated if django.VERSION >= (1, 10) else user.is_authenticated():
             if (CHECK_PERMS and user.has_perm('content_edit_change_cmscontent')) or (not CHECK_PERMS and user.is_staff):
                 change_perm = True
 
